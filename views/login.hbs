@@ -1,0 +1,46 @@
+{{#if this.isLogin}}
+<section id="LoginSection">
+    <div>
+        <h1>Login page</h1>
+        <form action="/userLogin" method="POST">
+            <label>Email</label>
+            <input type="text" placeholder="Please Enter your Email" name="email"/>
+             <label>Password</label>
+            <input type="passsword" placeholder="Please Enter your Password" name="password"/>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have Account? <a href="/createAccountDom">Click Here!!</a></p>
+
+    </div>
+    
+</section>
+{{else}}
+<section id="LoginSection">
+    <div>
+        <h1>SignUp page</h1>
+        <form action="/createUser" method="POST">
+            <label>Name</label>
+            <input type="text" placeholder="Please Enter your Name" name="name"/>
+             <label>Email</label>
+            <input type="email" placeholder="Please Enter your email" name="email"/>
+            <label>Password</label>
+            <input type="password" placeholder="Please Enter your address" name="password"/>
+            <label>Con-Password</label>
+            <input type="password" placeholder="Please Enter your address" />
+            <label>Address</label>
+            <input type="text" placeholder="Please Enter your address" name="address"/>
+            <div id="checkBoxField">
+                <input type="checkbox" name="member"  value="checked"/>
+                <label type="text">Sign Up to be a member ($75.00)</label>
+            </div>
+            
+            <button type="submit">Create An Account</button>
+        </form>
+        <p>Already have an Account? <a href="/loginDom">Click Here!!</a></p>
+
+    </div>
+    
+</section>
+{{/if}}
+
+

@@ -21,8 +21,21 @@ const onstart = () => {
   console.log("Hello there!!");
 };
 app.get("/", (req, res) => {
-  res.render("home", { layout: false });
+  //   res.render("login", { layout: "container", isLogin: true });
+  res.render("home", { layout: "container" });
 });
-
+app.get("/class", (req, res) => {
+  res.render("class", { layout: "container" });
+});
+app.get("/createAccountDom", (req, res) => {
+  res.render("login", { layout: "container", isLogin: false });
+});
+app.get("/loginDom", (req, res) => {
+  res.render("login", { layout: "container", isLogin: true });
+});
+app.get("/cartDom", (req, res) => {
+  res.render("cart", { layout: "container" });
+});
+app.use(express.static(__dirname + "/public"));
 app.use(userRoutes);
 app.listen(port, onstart);

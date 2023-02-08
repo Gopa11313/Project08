@@ -1,0 +1,234 @@
+header{
+    background-color: black;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px;
+}
+header h1{
+    color: white
+}
+header ul{
+    margin-top: auto;
+    margin-bottom: auto;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+header ul li {
+    text-decoration: none;
+}
+header ul li a{
+    text-decoration: none;
+    margin: 10px;
+    color: white;
+}
+main{
+    background-color: black;
+padding: 80px;
+}
+main section{
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+main section h1{
+    color: white;
+}
+main section>p{
+    color: white;
+}
+
+main section.partials div{
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    flex-direction: rows;
+    padding: 20px;
+    margin-top: 20px;
+}
+main section.partials div>img{
+    width: 350px;
+}
+main section.partials div>div h2{
+    margin: 0;
+}
+main section.partials div>div p{
+    text-align: left;
+}
+main section.partials div>div{
+display: flex;
+margin-left: 20px;
+flex-direction: column;
+}
+main section.partials div>div button{
+    background-color: black;
+    border-radius: 5px;
+    border: none;
+    width: 10vw;
+    padding: 10px;
+    color: white;
+}
+main section.partials div>div button:hover{
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+span{
+    color:brown ;
+}
+
+section#LoginSection{
+    background-color: black;
+    padding: 100px;
+}
+section#LoginSection div{
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+section#LoginSection div form{
+    display: flex;
+    flex-direction: column;
+    
+    text-align: left;
+}
+section#LoginSection div form label{
+    color: black;
+    font-weight:bold;
+    margin-top: 20px;
+}
+section#LoginSection div form input{
+    padding: 10px;
+    color: black;
+}
+section#LoginSection div form button{
+    background-color: black;
+    border-radius: 5px;
+    border: none;
+    width: 10vw;
+    padding: 10px;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+section#LoginSection div form button:hover{
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+section#LoginSection div form div#checkBoxField{
+    text-align: left;
+    margin-top: 10px;
+    padding: 0;
+}
+.welcomeSection{
+    background-image: url(https://wallpapercave.com/wp/wp2483004.jpg);
+    height: 800px;
+    
+}
+.welcomeSection div{
+    text-align: center;
+    padding-top: 200px;
+}
+.welcomeSection h1{
+    color: white;
+}
+.welcomeSection p{
+    margin: 0;
+    color: white;
+    font-size: large;
+    
+}
+.welcomeSection button{
+    color: black;
+    background-color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.welcomeSection button:hover{
+    color: white;
+    background-color: black;
+}
+.cartClass{
+    text-align: center;
+    color: black;
+
+}
+.cartClass div{
+    background-color: white;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+        width: 60vw;
+}
+.cartClass div form{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.cartClass div form label{
+   
+    color: black;
+    font-weight:bold;
+    margin-top: 20px;
+}
+.cartClass div form input{
+    padding: 10px;
+    color: black;
+}
+#checkOutClassItem{
+    display: flex;
+    padding: 0;
+    color: black;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+#checkOutClassItem button{
+   background-color: black;
+   color: white;
+   border: none;
+   margin-top: auto;
+   margin-bottom: auto;
+   height: 40px;
+   padding: 10px;
+   border-radius: 5px;
+}
+#checkOutClassItem button:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+.cartClass div form td{
+    display: block;
+    width: 3px;
+    background-color: gray;
+    border-radius: 5px;
+}
+#summary{
+    padding: 0;
+    text-align: right;
+}
+
+.cartClass div form>button{
+    background-color: black;
+    color: white;
+    border: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+}

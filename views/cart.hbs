@@ -1,0 +1,29 @@
+<main class="cartClass">
+    <h1>Checout</h1>
+    <div>
+
+        <form action="/user" method="POST">
+            <h2>Customer Details</h2>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" placeholder="Enter your name">
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email">
+            <span>Varified member</span>
+            
+            <h2>Your Classes</h2>
+            {{> checkoutClassItem }}
+
+            <div id="summary">
+                <p>SubTotal: $400</p>
+                <p>Tax: $40</p>
+            </div>
+            <div id="summary">
+                <p>Total: $440</p>
+            </div>
+
+            <button type="submit">Pay</button>
+        </form>
+        </form>
+    </div>
+</main>

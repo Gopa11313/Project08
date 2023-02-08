@@ -11,13 +11,38 @@ const user = mongoose.model("User", {
   },
   password: {
     type: String,
-    unique: true,
     required: true,
   },
   role: {
     type: String,
     enum: ["User", "Admin"],
-    defult: "User",
+    default: "User",
   },
+  isMember: {
+    type: Boolean,
+    default: false,
+  },
+  address: {
+    type: String,
+  },
+  purchase: [
+    {
+      details: {
+        price: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+      },
+
+      total: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 module.exports = user;

@@ -12,4 +12,8 @@ mongoose.model("classes", {
     type: String,
     required: true,
   },
+  instructorName: {
+    type: String,
+    required: true,
+  },
 });
