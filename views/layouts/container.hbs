@@ -16,7 +16,11 @@
         <li><a href="/">Home</a></li>
         <li><a href="/class">Classes</a></li>
         <li><a href="/cartDom">Cart</a></li>
+        {{#if this.isLogin}}
+        <li><a href="/logoutDom">Logout</a></li>
+        {{else}}
         <li><a href="/loginDom">Login</a></li>
+        {{/if}}
         
     </ul>
     {{!-- {{/if}} --}}

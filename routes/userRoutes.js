@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const user = require("../model/user");
-const purchase = require("../model/purchase");
+// const purchase = require("../model/purchase");
 
-router.post("/createUser", (req, res) => {
+router.post("/createUser", async (req, res) => {
   const data = req.body;
   console.log(data);
   const name = req.body.name;
@@ -11,34 +11,24 @@ router.post("/createUser", (req, res) => {
   const password = req.body.password;
   const address = req.body.address;
   const ismember = req.body.member;
-
+  let userData;
   let memberCondition = true;
-  if (ismember === "undefined") {
+  if (ismember === undefined) {
     memberCondition = false;
+  } else {
+    userData = user({
+      name: name,
+      email: email,
+      password: password,
+      address: address,
+      isMember: memberCondition,
+      role: "User",
+    });
   }
-  let userData = user({
-    name: name,
-    email: email,
-    password: password,
-    address: address,
-    isMember: memberCondition,
-    role: "User",
-  });
 
-  userData
+  await userData
     .save()
     .then(() => {
-      //   user
-      //     .findOne({ email: email })
-      //     .then(function (data) {
-      //       const purchase = purchase({
-      //         userId: data._id,
-      //         price: "75",
-      //       });
-      //     })
-      //     .catch(function (e) {
-      //       res.send(e);
-      //     });
       res.render("class", { layout: "container" });
     })
     .catch(function (e) {
@@ -46,19 +36,23 @@ router.post("/createUser", (req, res) => {
     });
 });
 
-router.post("/userLogin", (req, res) => {
-  console.log(req.body);
-  user
+router.post("/userLogin", async (req, res) => {
+  await user
     .find({ email: req.body.email })
     .then(function (data) {
       console.log(data[0].password);
       const retrieveData = data[0];
       if (retrieveData.password == req.body.password) {
         if (retrieveData.role == "User") {
-          console.log("We r here");
-          res.render("class", { layout: "container" });
+          req.session.username = retrieveData.name;
+          console.log(req.session);
+          res.render("class", { layout: "container", isLogin: true });
         } else {
-          res.send("Hi Admin");
+          res.render("admin", {
+            layout: "container",
+            data: data,
+            isLogin: true,
+          });
         }
       } else {
         res.send("False");
