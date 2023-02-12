@@ -1,5 +1,6 @@
 const express = require("express");
 const userRoutes = require("./routes/userRoutes");
+const classRoutes = require("./routes/classRoutes");
 const mongoose = require("./Database/db");
 const port = process.env.PORT || 3000;
 const exphbs = require("express-handlebars");
@@ -58,8 +59,16 @@ app.get("/logoutDom", (req, res) => {
   req.session.destroy();
   res.render("home", { layout: "container" });
 });
+app.get("/createClassDom", (req, res) => {
+  if (req.session.isAdmin == true) {
+    res.render("createClass", { layout: "container" });
+  } else {
+    res.send("You have to be Admin");
+  }
+});
 app.use(express.static(__dirname + "/public"));
 
 app.use(userRoutes);
+app.use(classRoutes);
 
 app.listen(port, onstart);

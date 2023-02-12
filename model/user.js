@@ -25,24 +25,27 @@ const user = mongoose.model("User", {
   address: {
     type: String,
   },
-  purchase: [
-    {
-      details: {
-        price: {
-          type: String,
-          required: true,
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-      },
+  purchase: {
+    type: String,
+  },
+  // purchase: [
+  //   {
+  //     details: {
+  //       price: {
+  //         type: String,
+  //         required: true,
+  //       },
+  //       name: {
+  //         type: String,
+  //         required: true,
+  //       },
+  //     },
 
-      total: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  //     total: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //   },
+  // ],
 });
 module.exports = user;

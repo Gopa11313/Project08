@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
-mongoose.model("classes", {
+const classes = mongoose.model("classes", {
   name: {
     type: String,
-    required: true,
   },
   duration: {
     type: String,
-    required: true,
   },
   image: {
     type: String,
-    required: true,
   },
   instructorName: {
     type: String,
-    required: true,
+  },
+  price: {
+    type: String,
   },
 });
+module.exports = classes;

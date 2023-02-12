@@ -1,5 +1,5 @@
-<section>
-    <h1>Name</h1>
+<section id="adminSection">
+    <h1>User</h1>
     <table>
         <tr>
             <th>Name</th>
@@ -7,13 +7,51 @@
             <th>isMember</th>
             <th>Price</th>
         </tr>
+        {{#each this.userData}}
         <tr>
-            <td> Gopal</td>
-            <td>Gopal </td>
-            <td> Ture</td>
+            <td> {{this.name}}</td>
+            <td>{{this.email }}</td>
+            {{#if this.isMember}}
+            <td style="color:blue">{{ this.isMember}}</td>
+            {{else}}
+            <td style="color:red">{{ this.isMember}}</td>
+            {{/if}}
+            <td>${{ this.purchase}}</td>
+        </tr>
+        {{/each}}
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="font-size: 19px; font-weight: bold;">Total</td>
+            <td>${{this.userPrice}}</td>
         </tr>
     </table>
-    {{!-- {{#each}} --}}
-        
-    {{!-- {{/each}} --}}
+</section>
+<section id="adminSection">
+    <div id="createSection">
+        <h1>Class</h1>
+        <button style="padding: 0; margin-bottom: 10px;"><a href="/createClassDom" style="text-decoration: none;">Create
+                Class</a></button>
+    </div>
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Duration</th>
+
+            <th>Instructor Name</th>
+            <th>Price</th>
+        </tr>
+        {{#each this.classDatas}}
+        <tr>
+
+            <th> <img src={{this.image}} style="height: 80px;"></th>
+            <th>{{this.name}}</th>
+            <th>{{this.duration}}</th>
+            <th>{{this.instructorName}}</th>
+            <th>$ {{this.price}}</th>
+
+        </tr>
+        {{/each}}
+    </table>
 </section>

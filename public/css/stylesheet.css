@@ -243,3 +243,19 @@ section table ,th, td{
     padding: 10px;
     
 }
+section table th{
+    font-weight: bolder;
+    font-size: 20px;
+}
+#adminSection{
+    text-align: center;
+}
+#createSection{
+    width: 60vw;
+    display: flex;
+    margin-left: auto;
+    margin-top:50px;
+    margin-right: auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
