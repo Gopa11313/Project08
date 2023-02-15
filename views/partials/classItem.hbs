@@ -1,8 +1,10 @@
 <div>
-    <img src="https://cdn.expatwoman.com/s3fs-public/editorial/zumba_-_patry_zumba_com.jpg"/>
+    <img src={{this.image}}/>
     <div>
-        <h2><span>Jumba Class</span> With <span>Gulprit</span></h2>
-        <p>Duration: 45 Min</p>
-        <button>Book Now</button>
+        <form action="/bookClass/{{this._id}}" method="POST">
+            <h2><span>{{this.name}}</span> With <span>{{this.instructorName}}</span></h2>
+            <p>Duration: {{this.duration}}</p>
+            <button type="submit">Book Now</button>
+        </form>
     </div>
 </div>

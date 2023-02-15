@@ -2,28 +2,29 @@
     <h1>Checout</h1>
     <div>
 
-        <form action="/user" method="POST">
+        <form action="/makePurchase/{{this.id}}/{{this.total}}" method="POST">
             <h2>Customer Details</h2>
             <label for="name">Name: </label>
             <input type="text" name="name" id="name" placeholder="Enter your name">
 
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="Enter your email">
+            <input type="email" name="email" id="email" placeholder="Enter your email" value={{this.email}}>
             <span>Varified member</span>
             
             <h2>Your Classes</h2>
-            {{> checkoutClassItem }}
-
+    
+            {{#each this.classDetails}}
+                {{> checkoutClassItem}}
+            {{/each}}
             <div id="summary">
-                <p>SubTotal: $400</p>
-                <p>Tax: $40</p>
+                <p >SubTotal: ${{this.price}}</p>
+                <p>Tax: ${{this.tax}}</p>
             </div>
             <div id="summary">
-                <p>Total: $440</p>
+                <p name="price" value={{this.total}}>Total: ${{this.total}}</p>
             </div>
-
             <button type="submit">Pay</button>
-        </form>
+    
         </form>
     </div>
 </main>

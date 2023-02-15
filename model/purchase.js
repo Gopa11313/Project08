@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const purchase = mongoose.model("purchases", {
-  userId: {
+  userEmail: {
     type: String,
   },
   classId: {

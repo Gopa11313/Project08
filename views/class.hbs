@@ -14,11 +14,11 @@
         <p>Let us help you find a class that meets your fitness goals</p>
     </section>
     <section class="partials">
-        {{> classItem}}
+        {{#each this.classesData}}
+        
+         {{> classItem}}
+        {{/each}}
 
-{{> classItem}}
-{{> classItem}}
-{{> classItem}}
     </section>
     </main>
     

@@ -21,28 +21,14 @@
         {{else}}
         <li><a href="/loginDom">Login</a></li>
         {{/if}}
+        {{#if this.isAdmin}}
+            <li><a href="/adminPage">Admin</a></li>
+        {{/if}}
         
     </ul>
-    {{!-- {{/if}} --}}
+
    </header>
 {{{body}}}
-{{!-- <main>
 
-</main>
-
-    <form action="/registerUSer" method="POST">
-        <label>Name</label>
-        <input type="text" name="name">
-        </br>
-        <label>email</label>
-        <input type="email" name="email">
-        </br>
-        <label>password</label>
-        <input type="password" name="password">
-        </br>
-    <button type="submit">Button</button>
-   </form>
-</form>
-     --}}
 </body>
 </html>

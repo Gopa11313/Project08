@@ -1,12 +1,14 @@
 const express = require("express");
 const userRoutes = require("./routes/userRoutes");
 const classRoutes = require("./routes/classRoutes");
+const PurchaseRoutes = require("./routes/purchaseRoutes");
 const mongoose = require("./Database/db");
 const port = process.env.PORT || 3000;
 const exphbs = require("express-handlebars");
 const express_session = require("express-session");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 app.engine(
   ".hbs",
   exphbs.engine({
@@ -33,25 +35,23 @@ app.get("/", (req, res) => {
   //   res.render("login", { layout: "container", isLogin: true });
   res.render("home", { layout: "container" });
 });
-app.get("/class", (req, res) => {
-  if (req.session.username != undefined) {
-    console.log(req.session);
-    res.render("class", { layout: "container" });
-  } else {
-    res.send("Please Login ");
-  }
-});
+
 app.get("/createAccountDom", (req, res) => {
-  res.render("login", { layout: "container", isLogin: false });
+  res.render("login", { layout: "container", isLoginForm: false });
 });
 app.get("/loginDom", (req, res) => {
-  res.render("login", { layout: "container", isLogin: true });
+  res.render("login", { layout: "container", isLoginForm: true });
 });
 app.get("/cartDom", (req, res) => {
-  if (req.session.username != undefined) {
-    res.render("cart", { layout: "container" });
+  console.log(req.session);
+  if (req.session.isLogin == true) {
+    res.render("cart", {
+      layout: "container",
+      email: req.session.email,
+      isLogin: true,
+    });
   } else {
-    res.send("Please Login ");
+    res.render("error", { layout: "container", message: "Please Login!!" });
   }
 });
 
@@ -63,11 +63,14 @@ app.get("/createClassDom", (req, res) => {
   if (req.session.isAdmin == true) {
     res.render("createClass", { layout: "container" });
   } else {
-    res.send("You have to be Admin");
+    res.render("error", {
+      layout: "container",
+      message: "Please Login as Admin!!",
+    });
   }
 });
-app.use(express.static(__dirname + "/public"));
 
+app.use(PurchaseRoutes);
 app.use(userRoutes);
 app.use(classRoutes);
 

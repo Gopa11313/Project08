@@ -19,37 +19,57 @@ router.post("/createUser", async (req, res) => {
     role = "Admin";
   }
   let memberCondition = true;
-  if (ismember == undefined || ismember == "") {
-    memberCondition = false;
-    userData = user({
-      name: name,
-      email: email,
-      password: password,
-      address: address,
-      isMember: memberCondition,
-      role: role,
-      purchase: "0.00",
-    });
+  if (
+    name != undefined ||
+    email != undefined ||
+    password != undefined ||
+    address != undefined
+  ) {
+    const classesDatas = await classes.find().lean();
+    if (ismember == undefined || ismember == "") {
+      memberCondition = false;
+      userData = user({
+        name: name,
+        email: email,
+        password: password,
+        address: address,
+        isMember: memberCondition,
+        role: role,
+        purchase: "0.00",
+      });
+    } else {
+      userData = user({
+        name: name,
+        email: email,
+        password: password,
+        address: address,
+        isMember: memberCondition,
+        role: role,
+        purchase: "75.00",
+      });
+    }
+    await userData
+      .save()
+      .then(() => {
+        req.session.username = name;
+        req.session.email = email;
+        req.session.isMember = retrieveData.isMember;
+        res.render("class", {
+          layout: "container",
+          isLogin: true,
+          isAdmin: false,
+          classesData: classesDatas,
+        });
+      })
+      .catch(function (e) {
+        res.render("error", { layout: "container" });
+      });
   } else {
-    userData = user({
-      name: name,
-      email: email,
-      password: password,
-      address: address,
-      isMember: memberCondition,
-      role: role,
-      purchase: "75.00",
+    res.render("error", {
+      layout: "container",
+      message: "Please fill out all the requried field",
     });
   }
-  console.log(userData);
-  await userData
-    .save()
-    .then(() => {
-      res.render("class", { layout: "container" });
-    })
-    .catch(function (e) {
-      res.send(e);
-    });
 });
 
 router.post("/userLogin", async (req, res) => {
@@ -58,38 +78,74 @@ router.post("/userLogin", async (req, res) => {
   for (item in userData) {
     userPrice = userPrice + parseFloat(userData[item].purchase);
   }
-  const classDatas = await classes.find().lean();
+  const classesDatas = await classes.find().lean();
   await user
     .find({ email: req.body.email })
     .then(function (data) {
-      console.log(data[0].password);
       const retrieveData = data[0];
       if (retrieveData.password == req.body.password) {
         if (retrieveData.role == "User") {
           req.session.username = retrieveData.name;
+          req.session.email = retrieveData.email;
+          req.session.isLogin = true;
+          req.session.isMember = retrieveData.isMember;
           req.session.isAdmin = false;
-          console.log(req.session);
-          res.render("class", { layout: "container", isLogin: true });
-        } else {
-          req.session.isAdmin = true;
-          res.render("admin", {
+          res.render("class", {
             layout: "container",
             isLogin: true,
-            userData: userData,
-            userPrice: userPrice,
-            classDatas: classDatas,
+            isAdmin: false,
+            classesData: classesDatas,
           });
+        } else {
+          req.session.isAdmin = true;
+          req.session.isLogin = true;
+          res.render("class", {
+            layout: "container",
+            isLogin: true,
+            isAdmin: true,
+            classesData: classesDatas,
+          });
+          // res.render("admin", {
+          //   layout: "container",
+          //   isLogin: true,
+          //   userData: userData,
+          //   userPrice: userPrice,
+          //   classDatas: classDatas,
+          // });
         }
       } else {
-        res.send("No USer Found");
+        res.render("error", { layout: "container", message: "No User Found" });
       }
     })
     .catch(function (e) {
-      res.send(e);
+      res.render("error", { layout: "container" });
     });
 });
 
-router.get("/allData", async (req, res) => {
-  const userData = user.find().lean();
+router.get("/adminPage", async (req, res) => {
+  console.log(req.session);
+  if (req.session.isAdmin === true) {
+    const userData = await user.find().lean();
+    let userPrice = 0.0;
+    // console.log(userData);
+    for (item in userData) {
+      console.log(userData[item]);
+      userPrice = userPrice + parseFloat(userData[item].purchase);
+    }
+    const classDatas = await classes.find().lean();
+    res.render("admin", {
+      layout: "container",
+      isLogin: true,
+      isAdmin: true,
+      userData: userData,
+      userPrice: userPrice,
+      classesData: classDatas,
+    });
+  } else {
+    res.render("error", {
+      layout: "container",
+      message: "Please Login As Admin!!",
+    });
+  }
 });
 module.exports = router;
