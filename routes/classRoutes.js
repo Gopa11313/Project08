@@ -15,29 +15,43 @@ router.post("/createClass", async (req, res) => {
     const instructorName = body.instructorName;
     const duration = body.duration;
     const price = body.price;
-    const classData = classes({
-      name: name,
-      image: imageUrl,
-      instructorName: instructorName,
-      duration: duration,
-      price: price,
-    });
-    classData
-      .save()
-      .then((data) => {
-        req.session.isAdmin = true;
-      })
-      .catch(function (e) {
-        res.render("error", { layout: "container" });
+    console.log(body);
+    if (
+      name != "" ||
+      imageUrl != "" ||
+      instructorName != "" ||
+      duration != ""
+    ) {
+      const classData = classes({
+        name: name,
+        image: imageUrl,
+        instructorName: instructorName,
+        duration: duration,
+        price: price,
       });
-    const classDatas = await classes.find().lean();
-    res.render("admin", {
-      layout: "container",
-      isLogin: true,
-      userData: userData,
-      userPrice: userPrice,
-      classesData: classDatas,
-    });
+      classData
+        .save()
+        .then((data) => {
+          req.session.isAdmin = true;
+        })
+        .catch(function (e) {
+          res.render("error", { layout: "container" });
+        });
+      const classDatas = await classes.find().lean();
+      res.render("admin", {
+        layout: "container",
+        isLogin: true,
+        isAdmin: true,
+        userData: userData,
+        userPrice: userPrice,
+        classesData: classDatas,
+      });
+    } else {
+      res.render("error", {
+        layout: "container",
+        message: "Please fill out all the requried field",
+      });
+    }
   } else {
     res.render("error", { layout: "container", message: "Please Login!!" });
   }

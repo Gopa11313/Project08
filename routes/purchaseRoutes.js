@@ -15,7 +15,7 @@ router.post("/bookClass/:id", async (req, res) => {
     const classDetails = await classes.find({ _id: classId }).lean();
 
     console.log(classDetails);
-    if (req.params.isMember == true) {
+    if (req.session.isMember == true) {
       price = 0;
     } else {
       price = classDetails[0].price;
@@ -48,7 +48,10 @@ router.post("/makePurchase/:id/:price", async (req, res) => {
       await data
         .save()
         .then((datas) => {
-          res.send("You have successfully inrolled in class");
+          res.send(
+            "You have successfully inrolled in class and this is your transcation id: " +
+              Math.floor(100000 + Math.random() * 900000)
+          );
         })
         .catch(function (e) {
           res.render("error", { layout: "container" });
@@ -63,10 +66,11 @@ router.post("/makePurchase/:id/:price", async (req, res) => {
       res.render("error", { layout: "container", message: "Please Login!!" });
     }
   } else {
-    res.render("error", {
-      layout: "container",
-      message: "Please fill out all the required feild!!",
-    });
+    res.send("Please Login to inroll in classes.!! ");
+    // res.render("error", {
+    //   layout: "container",
+    //   message: "Please fill out all the required feild!!",
+    // });
   }
 });
 module.exports = router;

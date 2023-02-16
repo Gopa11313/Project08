@@ -29,10 +29,9 @@ app.use(
 );
 app.set("view engine", ".hbs");
 const onstart = () => {
-  console.log("Hello there!!");
+  console.log("Welcome!!");
 };
 app.get("/", (req, res) => {
-  //   res.render("login", { layout: "container", isLogin: true });
   res.render("home", { layout: "container" });
 });
 
@@ -51,8 +50,17 @@ app.get("/cartDom", (req, res) => {
       isLogin: true,
     });
   } else {
-    res.render("error", { layout: "container", message: "Please Login!!" });
+    res.render("cart", {
+      layout: "container",
+      email: req.session.email,
+      id: "notLogin",
+      total: "notLogin",
+      isLogin: false,
+    });
   }
+  // } else {
+  //   res.render("error", { layout: "container", message: "Please Login!!" });
+  // }
 });
 
 app.get("/logoutDom", (req, res) => {

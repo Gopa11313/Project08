@@ -53,7 +53,7 @@ router.post("/createUser", async (req, res) => {
       .then(() => {
         req.session.username = name;
         req.session.email = email;
-        req.session.isMember = retrieveData.isMember;
+        req.session.isMember = memberCondition;
         res.render("class", {
           layout: "container",
           isLogin: true,
@@ -62,6 +62,7 @@ router.post("/createUser", async (req, res) => {
         });
       })
       .catch(function (e) {
+        console.log(e);
         res.render("error", { layout: "container" });
       });
   } else {
@@ -125,7 +126,7 @@ router.post("/userLogin", async (req, res) => {
 router.get("/adminPage", async (req, res) => {
   console.log(req.session);
   if (req.session.isAdmin === true) {
-    const userData = await user.find().lean();
+    const userData = await user.find().sort({ email: 1 }).lean();
     let userPrice = 0.0;
     // console.log(userData);
     for (item in userData) {
@@ -133,6 +134,7 @@ router.get("/adminPage", async (req, res) => {
       userPrice = userPrice + parseFloat(userData[item].purchase);
     }
     const classDatas = await classes.find().lean();
+    console.log(classDatas);
     res.render("admin", {
       layout: "container",
       isLogin: true,

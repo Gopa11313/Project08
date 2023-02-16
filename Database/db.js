@@ -1,3 +1,3 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/RandomDatabase");
+mongoose.connect("mongodb://localhost:27017/Fitness");
 module.exports = mongoose;
